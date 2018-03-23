@@ -11,6 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 using medic.Data;
 using medic.Models;
 using medic.Services;
+using medic.Data.Context;
+using Medic.Authorization;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace medic
 {
@@ -29,14 +33,41 @@ namespace medic
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            var connection = "Server=(localdb)\\mssqllocaldb;Database=MedicDB;Trusted_Connection=True;ConnectRetryCount=0";
+            services.AddDbContext<MedicContext>(options => options.UseSqlServer(connection));
+
+
+
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+               { // Password settings
+                   options.Password.RequireDigit = false;
+                   options.Password.RequiredLength = 6;
+                   options.Password.RequiredUniqueChars = 0;
+                   options.Password.RequireLowercase = false;
+                   options.Password.RequireNonAlphanumeric = false;
+                   options.Password.RequireUppercase = false;
+
+
+
+
+               })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            // Authorization handlers.
+            services.AddScoped<IAuthorizationHandler,
+                                  UserIsOwnerAuthorizationHandler>();
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
-            services.AddMvc();
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                                 .RequireAuthenticatedUser()
+                                 .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

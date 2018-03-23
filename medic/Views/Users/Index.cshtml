@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<style>
+    .texto_grande {
+        font-size: 2.5rem;
+        color: white;
+    }
+
+    #icone_grande {
+        font-size: 8rem;
+        color: #fff;
+    }
+</style>
+
+
+<div class="container">
+    <div class="col-md-3">
+        <a class="btn btn-block btn-lg btn-success"  asp-controller="Pacientes" asp-action="Index">
+            <i class="fa fa-users" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-plus-circle"></i> Pacientes</span>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="btn btn-block btn-lg btn-primary" data-toggle="modal" data-target="#mymodal">
+            <i class="fa fa-user-md" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-list-ul"></i> Consultas</span>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="btn btn-block btn-lg btn-success" asp-controller="Pacientes" asp-action="Index">
+            <i class="fa fa-users" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-plus-circle"></i> Pacientes</span>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="btn btn-block btn-lg btn-warning" data-toggle="modal" data-target="#mymodal">
+            <i class="fa fa-pied-piper-alt" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-list-ul"></i> LIST Usuários</span>
+        </a>
+    </div>
+</div>
+
