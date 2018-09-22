@@ -12,6 +12,8 @@ namespace medic.Models
     {
         [EnumDataType(typeof(Tipo))]
         [Required]
+
+
         public Tipo Type { get; set; }
 
         public enum Tipo
