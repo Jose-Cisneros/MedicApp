@@ -26,7 +26,7 @@ namespace medic.Controllers
         }
 
         // GET: Medicos/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(String id)
         {
             if (id == null)
             {
@@ -66,7 +66,7 @@ namespace medic.Controllers
         }
 
         // GET: Medicos/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(String id)
         {
             if (id == null)
             {
@@ -86,7 +86,7 @@ namespace medic.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MedicoID,Nombre,DNI,Matricula")] Medico medico)
+        public async Task<IActionResult> Edit(String id, [Bind("MedicoID,Nombre,DNI,Matricula")] Medico medico)
         {
             if (id != medico.MedicoID)
             {
@@ -117,7 +117,7 @@ namespace medic.Controllers
         }
 
         // GET: Medicos/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(String id)
         {
             if (id == null)
             {
@@ -137,7 +137,7 @@ namespace medic.Controllers
         // POST: Medicos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(String id)
         {
             var medico = await _context.Medicos.SingleOrDefaultAsync(m => m.MedicoID == id);
             _context.Medicos.Remove(medico);
@@ -145,7 +145,7 @@ namespace medic.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MedicoExists(int id)
+        private bool MedicoExists(String id)
         {
             return _context.Medicos.Any(e => e.MedicoID == id);
         }

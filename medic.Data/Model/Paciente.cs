@@ -9,7 +9,7 @@ namespace medic.Data.Model
     {
 
 
-        public int PacienteID { get; set; }
+        public String PacienteID { get; set; }
         public String Nombre { get; set; }
         public int DNI { get; set; }
         public int Telefono { get; set; }

@@ -1,11 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
 namespace medic.Data.Migrations
 {
-    public partial class inicial : Migration
+    public partial class initialfix2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,8 +12,7 @@ namespace medic.Data.Migrations
                 name: "Medicos",
                 columns: table => new
                 {
-                    MedicoID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    MedicoID = table.Column<string>(nullable: false),
                     DNI = table.Column<int>(nullable: false),
                     Matricula = table.Column<int>(nullable: false),
                     Nombre = table.Column<string>(nullable: true)
@@ -28,10 +26,11 @@ namespace medic.Data.Migrations
                 name: "Pacientes",
                 columns: table => new
                 {
-                    PacienteID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    PacienteID = table.Column<string>(nullable: false),
                     DNI = table.Column<int>(nullable: false),
+                    Email = table.Column<string>(nullable: true),
                     Nombre = table.Column<string>(nullable: true),
+                    Observacion = table.Column<string>(nullable: true),
                     Telefono = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -43,12 +42,13 @@ namespace medic.Data.Migrations
                 name: "Consultas",
                 columns: table => new
                 {
-                    ConsultaID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ConsultaID = table.Column<string>(nullable: false),
+                    Estado = table.Column<int>(nullable: false),
                     Fecha = table.Column<DateTime>(nullable: false),
-                    MedicoID = table.Column<int>(nullable: false),
+                    MedicoID = table.Column<string>(nullable: true),
                     Observacion = table.Column<string>(nullable: true),
-                    PacienteID = table.Column<int>(nullable: false)
+                    OwnerID = table.Column<string>(nullable: true),
+                    PacienteID = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -58,13 +58,13 @@ namespace medic.Data.Migrations
                         column: x => x.MedicoID,
                         principalTable: "Medicos",
                         principalColumn: "MedicoID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Consultas_Pacientes_PacienteID",
                         column: x => x.PacienteID,
                         principalTable: "Pacientes",
                         principalColumn: "PacienteID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

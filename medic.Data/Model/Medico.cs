@@ -8,7 +8,7 @@ namespace medic.Data.Model
      public class Medico
     {
        
-        public int MedicoID { get; set; }
+        public String MedicoID { get; set; }
         public String Nombre { get; set; }
         public int DNI { get; set; }
         public int Matricula { get; set; }

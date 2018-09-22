@@ -37,7 +37,7 @@ namespace medic.Controllers
         }
 
         // GET: Consultas/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(String id)
         {
             if (id == null)
             {
@@ -59,7 +59,7 @@ namespace medic.Controllers
         // GET: Consultas/Create
         public IActionResult Create()
         {
-            ViewData["MedicoID"] = new SelectList(_context.Medicos, "MedicoID", "DNI");
+            
             ViewData["PacienteID"] = new SelectList(_context.Pacientes, "PacienteID", "Nombre" );
             return View();
         }
@@ -69,23 +69,24 @@ namespace medic.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ConsultaID,Fecha,Observacion,Estado,MedicoID,PacienteID")] Consulta consulta)
+        public async Task<IActionResult> Create([Bind("ConsultaID,Fecha,Observacion,Estado,PacienteID")] Consulta consulta)
         {
             if (ModelState.IsValid)
             {
                 var userId = _userManager.GetUserId(HttpContext.User);
                 consulta.OwnerID = userId;
+                consulta.MedicoID = userId;
                 _context.Add(consulta);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MedicoID"] = new SelectList(_context.Medicos, "MedicoID", "MedicoID", consulta.MedicoID);
+            
             ViewData["PacienteID"] = new SelectList(_context.Pacientes, "PacienteID", "PacienteID", consulta.PacienteID);
             return View(consulta);
         }
 
         // GET: Consultas/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(String id)
         {
             if (id == null)
             {
@@ -107,7 +108,7 @@ namespace medic.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ConsultaID,Fecha,Observacion,Estado,MedicoID,PacienteID")] Consulta consulta)
+        public async Task<IActionResult> Edit(String id, [Bind("ConsultaID,Fecha,Observacion,Estado,MedicoID,PacienteID")] Consulta consulta)
         {
             if (id != consulta.ConsultaID)
             {
@@ -140,7 +141,7 @@ namespace medic.Controllers
         }
 
         // GET: Consultas/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(String id)
         {
             if (id == null)
             {
@@ -162,7 +163,7 @@ namespace medic.Controllers
         // POST: Consultas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(String id)
         {
             var consulta = await _context.Consultas.SingleOrDefaultAsync(m => m.ConsultaID == id);
             _context.Consultas.Remove(consulta);
@@ -170,7 +171,7 @@ namespace medic.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ConsultaExists(int id)
+        private bool ConsultaExists(String id)
         {
             return _context.Consultas.Any(e => e.ConsultaID == id);
         }

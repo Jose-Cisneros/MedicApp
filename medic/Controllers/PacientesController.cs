@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using medic.Data.Context;
 using medic.Data.Model;
+using System;
 //using medic.Models.AppViewModels;
 
 namespace medic.Web.Controllers
@@ -24,7 +25,7 @@ namespace medic.Web.Controllers
         }
 
         // GET: Pacientes/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(String id)
         {
             if (id == null)
             {
@@ -64,7 +65,7 @@ namespace medic.Web.Controllers
         }
 
         // GET: Pacientes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(String id)
         {
             if (id == null)
             {
@@ -84,7 +85,7 @@ namespace medic.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Nombre,DNI,Telefono")] Paciente paciente)
+        public async Task<IActionResult> Edit(String id, [Bind("Nombre,DNI,Telefono")] Paciente paciente)
         {
             if (id != paciente.PacienteID)
             {
@@ -115,7 +116,7 @@ namespace medic.Web.Controllers
         }
 
         // GET: Pacientes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(String id)
         {
             if (id == null)
             {
@@ -135,7 +136,7 @@ namespace medic.Web.Controllers
         // POST: Pacientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(String id)
         {
             var paciente = await _context.Pacientes.SingleOrDefaultAsync(m => m.PacienteID == id);
             _context.Pacientes.Remove(paciente);
@@ -143,7 +144,7 @@ namespace medic.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PacienteExists(int id)
+        private bool PacienteExists(String id)
         {
             return _context.Pacientes.Any(e => e.PacienteID == id);
         }

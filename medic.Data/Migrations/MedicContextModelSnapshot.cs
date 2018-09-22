@@ -23,20 +23,20 @@ namespace medic.Data.Migrations
 
             modelBuilder.Entity("medic.Data.Model.Consulta", b =>
                 {
-                    b.Property<int>("ConsultaID")
+                    b.Property<string>("ConsultaID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Estado");
 
                     b.Property<DateTime>("Fecha");
 
-                    b.Property<int>("MedicoID");
+                    b.Property<string>("MedicoID");
 
                     b.Property<string>("Observacion");
 
                     b.Property<string>("OwnerID");
 
-                    b.Property<int>("PacienteID");
+                    b.Property<string>("PacienteID");
 
                     b.HasKey("ConsultaID");
 
@@ -49,7 +49,7 @@ namespace medic.Data.Migrations
 
             modelBuilder.Entity("medic.Data.Model.Medico", b =>
                 {
-                    b.Property<int>("MedicoID")
+                    b.Property<string>("MedicoID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("DNI");
@@ -65,7 +65,7 @@ namespace medic.Data.Migrations
 
             modelBuilder.Entity("medic.Data.Model.Paciente", b =>
                 {
-                    b.Property<int>("PacienteID")
+                    b.Property<string>("PacienteID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("DNI");
@@ -87,13 +87,11 @@ namespace medic.Data.Migrations
                 {
                     b.HasOne("medic.Data.Model.Medico", "Medico")
                         .WithMany("Consultas")
-                        .HasForeignKey("MedicoID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("MedicoID");
 
                     b.HasOne("medic.Data.Model.Paciente", "Paciente")
                         .WithMany("Consultas")
-                        .HasForeignKey("PacienteID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("PacienteID");
                 });
 #pragma warning restore 612, 618
         }

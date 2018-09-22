@@ -9,7 +9,7 @@ namespace medic.Data.Model
     {
         public string OwnerID { get; set; }
 
-        public int ConsultaID { get; set; }
+        public String ConsultaID { get; set; }
         public DateTime Fecha { get; set; }
         public String Observacion { get; set; }
 
@@ -17,10 +17,10 @@ namespace medic.Data.Model
         public Estado Estado { get; set; }
 
 
-        public int MedicoID { get; set; }
+        public String MedicoID { get; set; }
         public Medico Medico { get; set; }
 
-        public int PacienteID { get; set; }
+        public String PacienteID { get; set; }
         public Paciente Paciente { get; set; }
 
 
