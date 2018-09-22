@@ -236,7 +236,6 @@ namespace medic.Controllers
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
-
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     var userId = user.Id;
                     String tipo = user.Type.ToString();

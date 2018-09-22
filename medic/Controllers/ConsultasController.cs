@@ -33,6 +33,7 @@ namespace medic.Controllers
             var medicContext = _context.Consultas.Include(c => c.Medico).Include(c => c.Paciente);
 
             var userId = _userManager.GetUserId(HttpContext.User);
+
             return View(await medicContext.Where( g => g.OwnerID == userId).ToListAsync());
         }
 

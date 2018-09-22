@@ -1,0 +1,27 @@
+﻿@model IEnumerable<medic.Data.Model.Consulta>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<link rel="stylesheet" type="text/css" href="~/css/bootstrap-year-calendar.css" />
+
+<h2>Index</h2>
+<div data-provide="calendar"></div>
+
+
+
+<script src="~/js/bootstrap-year-calendar.js"></script>
+<script>
+  
+    $(document).ready(function () {
+        $(function () {
+            $.getJSON('@Url.Action("GetConsults", "Calendar")', function (resp) { alert("AA");console.log(resp) });
+           
+        });
+    });
+
+
+
+</script>
