@@ -19,27 +19,35 @@
             <th>
                 @Html.DisplayNameFor(model => model.Paciente)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Paciente.DNI)
+            </th>
+      
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Fecha)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Observacion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Estado)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Paciente.PacienteID)
-                </td>
-
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Paciente.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Paciente.DNI)
+            </td>
+            <td>
+                <a asp-controller="Consultas" asp-action="Details" asp-route-id="@item.ConsultaID">Details</a> |
+            </td>
+        </tr>
         }
     </tbody>
 </table>

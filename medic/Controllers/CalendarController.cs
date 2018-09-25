@@ -57,11 +57,13 @@ namespace medic.Controllers
 
         }
 
-        public ActionResult PartialConsults(String date)
+        public async Task<ActionResult> PartialConsults(String date)
         {
+      
             var newDate = DateTime.Parse(date);
             var userId = _userManager.GetUserId(HttpContext.User);
-            return PartialView(_context.Consultas.Where(g => g.OwnerID == userId && g.Fecha.Date == newDate));
+            var list = await _context.Consultas.Where(g => g.OwnerID == userId && g.Fecha.Date == newDate).ToListAsync();
+            return PartialView(list);
         }
     }
 }
