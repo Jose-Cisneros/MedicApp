@@ -25,5 +25,7 @@ namespace medic.Data
         }
 
         public DbSet<medic.Data.Model.Paciente> Paciente { get; set; }
+
+        public DbSet<medic.Data.Model.Medico> Medico { get; set; }
     }
 }

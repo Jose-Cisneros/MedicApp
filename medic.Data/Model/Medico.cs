@@ -9,7 +9,8 @@ namespace medic.Data.Model
     {
        
         public String MedicoID { get; set; }
-        public String Nombre { get; set; }
+        public String Nombre { get; set; }      
+        public String Especialidad { get; set; }
         public int DNI { get; set; }
         public int Matricula { get; set; }
 

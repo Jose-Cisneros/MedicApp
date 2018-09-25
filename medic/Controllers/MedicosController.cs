@@ -24,6 +24,15 @@ namespace medic.Controllers
         {
             return View(await _context.Medicos.ToListAsync());
         }
+        public async Task<IActionResult> GetForSpecialidad(String especialidad)
+        {
+            var esp = especialidad;
+            var medicos =  _context.Medicos;
+            var especialistas = await medicos.Where(g => g.Especialidad == especialidad).ToListAsync();
+         return   View(especialistas);
+
+
+        }
 
         // GET: Medicos/Details/5
         public async Task<IActionResult> Details(String id)
@@ -54,7 +63,7 @@ namespace medic.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MedicoID,Nombre,DNI,Matricula")] Medico medico)
+        public async Task<IActionResult> Create([Bind("MedicoID,Nombre,DNI,Matricula,Especialidad")] Medico medico)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +95,7 @@ namespace medic.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(String id, [Bind("MedicoID,Nombre,DNI,Matricula")] Medico medico)
+        public async Task<IActionResult> Edit(String id, [Bind("MedicoID,Nombre,DNI,Matricula,Especialidad")] Medico medico)
         {
             if (id != medico.MedicoID)
             {
@@ -145,7 +154,12 @@ namespace medic.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MedicoExists(String id)
+        public ActionResult GetAllDoctors()
+        {
+            return View();
+        }
+
+        private bool MedicoExists(string id)
         {
             return _context.Medicos.Any(e => e.MedicoID == id);
         }
