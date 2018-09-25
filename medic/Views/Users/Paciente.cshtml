@@ -4,5 +4,49 @@
     Layout = "~/Views/Shared/_layoutMenu.cshtml";
 }
 
-<h2>Paciente</h2>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<style>
+    .texto_grande {
+        font-size: 2.5rem;
+        color: white;
+    }
 
+    #icone_grande {
+        font-size: 8rem;
+        color: #fff;
+    }
+</style>
+
+<h2 class="text-center">Menú de Paciente</h2>
+<br />
+<div class="container">
+    <div class="col-md-4">
+        <a class="btn btn-block btn-lg btn-success" asp-controller="Calendar" asp-action="Index">
+            <i class="fa fa-calendar" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-list-alt"></i> Calendario</span>
+        </a>
+        <br />
+    </div>
+    <div class="col-md-4">
+        <a class="btn btn-block btn-lg btn-primary" asp-controller="Consultas" asp-action="Index">
+            <i class="fa fa-user-md" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-list-ul"></i> Consultas</span>
+        </a>
+        <br />
+    </div>
+    <div class="col-md-4">
+        <a class="btn btn-block btn-lg btn-info" asp-controller="Medicos" asp-action="GetAllDoctors">
+            <i class="fa fa-users" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-plus-circle"></i> Buscar especialistas</span>
+        </a>
+        <br />
+    </div>
+    <!--
+        <div class="col-md-3">
+        <a class="btn btn-block btn-lg btn-info" data-toggle="modal" data-target="#mymodal">
+            <i class="fa fa-pied-piper-alt" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-list-ul"></i> LIST Usuários</span>
+        </a>
+    </div>
+    -->
+</div>

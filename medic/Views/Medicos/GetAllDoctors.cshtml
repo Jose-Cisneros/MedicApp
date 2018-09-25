@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewData["Title"] = "Categorias";
+    Layout = "~/Views/Shared/_layoutMenu.cshtml";
+
+}
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<style>
+    .texto_grande {
+        font-size: 2.5rem;
+        color: white;
+    }
+
+    #icone_grande {
+        font-size: 8rem;
+        color: #fff;
+    }
+
+    .nuevo {
+        width: fit-content;
+        background-color: tomato;
+        border-radius: 20px;
+        padding:1%;
+
+    }
+</style>
+
+<br />
+    
+<h2>Nuestros especialistas</h2>
+
+<div class="container">
+    <div class="col-md-4">
+        <a class="btn btn-block btn-lg btn-primary" asp-controller="Medicos" asp-action="GetForSpecialidad" asp-route-especialidad="traumatologo">
+            <i class="fa fa-user-md" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-list-ul"></i> Traumatologos</span>
+        </a>
+        <br />
+    </div>
+    <div class="col-md-4">
+        <a class="btn btn-block btn-lg btn-primary" asp-controller="Medicos" asp-action="GetForSpecialidad" asp-route-especialidad="cardiologo">
+            <i class="fa fa-user-md" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-list-ul"></i> Cardiologos</span>
+        </a>
+        <br />
+    </div>
+    <div class="col-md-4">
+        <a class="btn btn-block btn-lg btn-primary"asp-controller="Medicos" asp-action="GetForSpecialidad" asp-route-especialidad="pediatra">
+            <i class="fa fa-user-md" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-list-ul"></i> Pediatras</span>
+        </a>
+        <br />
+    </div>
+    <div class="col-md-4">
+        <a class="btn btn-block btn-lg btn-primary" asp-controller="Medicos" asp-action="GetForSpecialidad" asp-route-especialidad="cirujano">
+            <i class="fa fa-user-md" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-list-ul"></i> Especialistas en cirujia</span>
+        </a>
+        <br />
+    </div>
+    <div class="col-md-4">
+        <a class="btn btn-block btn-lg btn-primary" asp-controller="Medicos" asp-action="GetForSpecialidad" asp-route-especialidad="oftalmologo">
+            <i class="fa fa-user-md" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-list-ul"></i> Oftalmologos </span>
+        </a>
+        <br />
+    </div>
+    <div class="col-md-4">
+        <a class="btn btn-block btn-lg btn-primary" asp-controller="Medicos" asp-action="GetForSpecialidad" asp-route-especialidad="dermatologo">
+            <i class="fa fa-user-md" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-list-ul"></i> Dermatologos</span>
+        </a>
+        <br />
+    </div>
+
+    <div class="col-md-4">
+        
+        <a class="btn btn-block btn-lg btn-primary" asp-controller="Medicos" asp-action="GetForSpecialidad" asp-route-especialidad="nutricionista">
+            <div class="nuevo">
+                <span> NUEVO </span>
+            </div>
+            <i class="fa fa-user-md" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-list-ul"></i> Nutricionistas</span>
+        </a>
+        <br />
+    </div>
+    <div class="col-md-4">
+      
+        <a class="btn btn-block btn-lg btn-primary" asp-controller="Medicos" asp-action="GetForSpecialidad" asp-route-especialidad="kinesiologo">
+            <div class="nuevo">
+                <span> NUEVO </span>
+            </div>
+            <i class="fa fa-user-md" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-list-ul"></i> Kinesiologos </span>
+        </a>
+        <br />
+    </div>
+    <div class="col-md-4">
+       
+        <a class="btn btn-block btn-lg btn-primary" asp-controller="Medicos" asp-action="GetForSpecialidad" asp-route-especialidad="odontologo">
+            <div class="nuevo">
+                <span> NUEVO </span>
+            </div>
+            <i class="fa fa-user-md" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-list-ul"></i> Odontologos </span>
+        </a>
+        <br />
+    </div>
+
+
+</div>
+
+
