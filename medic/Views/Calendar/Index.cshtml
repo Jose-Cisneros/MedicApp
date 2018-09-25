@@ -1,27 +1,59 @@
 ﻿@model IEnumerable<medic.Data.Model.Consulta>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Calendario";
 }
 
 
-<link rel="stylesheet" type="text/css" href="~/css/bootstrap-year-calendar.css" />
 
-<h2>Index</h2>
-<div data-provide="calendar"></div>
+<h2>Calendario</h2>
+
+<div id="calendar"></div>
+<div id="loader" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+<div id="consultas"></div>
 
 
 
-<script src="~/js/bootstrap-year-calendar.js"></script>
+<link rel="stylesheet" href="~/css/bootstrap-year-calendar.css">
+<script type="text/javascript" src="~/js/bootstrap-year-calendar.min.js"></script>
+<script type="text/javascript" src="~/js/calend.js"></script>
+
 <script>
-  
-    $(document).ready(function () {
-        $(function () {
-            $.getJSON('@Url.Action("GetConsults", "Calendar")', function (resp) { alert("AA");console.log(resp) });
-           
-        });
-    });
 
 
+    var currentYear = new Date().getFullYear();
+    
+    $.get('@Url.Action("GetCalendarDatasource", "Calendar")', function (resp) {
+        resp.map(x => x.startDate = new Date(x.startDate))
+        resp.map(x => x.endDate = new Date(x.endDate))
+        $('#calendar').calendar({
+            dataSource: resp,
+            clickDay: function (e) {
+
+                $('#loader').show();
+     
+                $('#consultas').hide();
+
+                $.ajax({
+                    type: "GET",
+                    url: "/calendar/partialconsults",
+                    data: { date: e.date.toLocaleDateString() },
+                    contentType: "text/html",
+                    dataType: "html",
+                    success: function (data) {
+                        $('#loader').hide();
+                        $('#consultas').show();
+                        $("#consultas").html(data);
+                    },
+                    error: function (error) { alert(error); }
+                });
+                      
+            }
+        })
+        $('#loader').hide();
+
+        
+    })
+   
 
 </script>

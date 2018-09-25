@@ -23,7 +23,10 @@ namespace medic.Data.Model
         public String PacienteID { get; set; }
         public Paciente Paciente { get; set; }
 
-
+        public EventSource ToEventSource()
+        {
+            return new EventSource() { StartDate = Fecha.Date.ToString("yyyy-MM-ddTHH:mm:ss"), EndDate = Fecha.Date.ToString("yyyy-MM-ddTHH:mm:ss"), Name = Observacion };
+        }
     }
 
     public enum Estado

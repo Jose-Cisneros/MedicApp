@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using medic.Data.Context;
+using medic.Data.Model;
 using medic.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -37,6 +38,30 @@ namespace medic.Controllers
 
             return Json(View(await medicContext.Where(g => g.OwnerID == userId).ToListAsync()));
 
+        }
+
+        public async Task<JsonResult> GetCalendarDatasource()
+        {
+            var medicContext = _context.Consultas.Include(c => c.Medico).Include(c => c.Paciente);
+
+            var userId = _userManager.GetUserId(HttpContext.User);
+            var consults = await medicContext.Where(g => g.OwnerID == userId).ToListAsync();
+            var eventList = new List<EventSource>();
+            foreach ( var c in consults)
+            {
+                eventList.Add(c.ToEventSource());
+            }
+
+            return Json(eventList);
+
+
+        }
+
+        public ActionResult PartialConsults(String date)
+        {
+            var newDate = DateTime.Parse(date);
+            var userId = _userManager.GetUserId(HttpContext.User);
+            return PartialView(_context.Consultas.Where(g => g.OwnerID == userId && g.Fecha.Date == newDate));
         }
     }
 }
