@@ -6,6 +6,16 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
+    <style>
+        .navbar {
+            background-color: #00ad5f !important;
+        }
+
+        a span {
+            color: white;
+        }
+    </style>
+
     <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
@@ -20,7 +30,7 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
-        <li><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
+        <li><a asp-area="" asp-controller="Account" asp-action="Register"><span>Register</span></a></li>
+        <li><a asp-area="" asp-controller="Account" asp-action="Login"><span>Log In</span> </a></li>
     </ul>
 }

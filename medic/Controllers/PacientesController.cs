@@ -21,7 +21,8 @@ namespace medic.Web.Controllers
         // GET: Pacientes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Pacientes.ToListAsync());
+           return View(await _context.Pacientes.ToListAsync());
+         
         }
 
         // GET: Pacientes/Details/5
