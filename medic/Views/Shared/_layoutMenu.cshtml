@@ -21,17 +21,22 @@
         .navbar {
             background-color: #00ad5f !important;
         }
+        .right{
+            float:right!important;
+        }
     </style>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top right">
         <div class="container">
-            <div class="navbar-header">
+            <div class="navbar-header right">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                
+                <div>
+                    @await Html.PartialAsync("_LoginPartial")
+                </div>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav"></ul>
