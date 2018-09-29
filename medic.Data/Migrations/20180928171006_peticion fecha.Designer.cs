@@ -12,9 +12,10 @@ using System;
 namespace medic.Data.Migrations
 {
     [DbContext(typeof(MedicContext))]
-    partial class MedicContextModelSnapshot : ModelSnapshot
+    [Migration("20180928171006_peticion fecha")]
+    partial class peticionfecha
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

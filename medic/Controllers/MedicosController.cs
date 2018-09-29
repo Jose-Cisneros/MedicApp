@@ -7,16 +7,22 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using medic.Data.Context;
 using medic.Data.Model;
+using Microsoft.AspNetCore.Identity;
+using medic.Models;
 
 namespace medic.Controllers
 {
     public class MedicosController : Controller
     {
         private readonly MedicContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public MedicosController(MedicContext context)
+        public MedicosController(MedicContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
+
+
         }
 
         // GET: Medicos
@@ -29,7 +35,8 @@ namespace medic.Controllers
             var esp = especialidad;
             var medicos =  _context.Medicos;
             var especialistas = await medicos.Where(g => g.Especialidad == especialidad).ToListAsync();
-         return   View(especialistas);
+
+            return   View(especialistas);
 
 
         }
@@ -154,9 +161,37 @@ namespace medic.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> GetNotificaciones()
+        {
+            var peticiones = _context.PeticionPacienteAMedicos;
+            var doctorId = _userManager.GetUserId(HttpContext.User);
+            var notificaciones = await peticiones.Where(g => g.MedicoID == doctorId && g.visto == false ).ToListAsync();
+
+            foreach (PeticionPacienteAMedico peticionPacienteAMedico in notificaciones )
+            {
+                peticionPacienteAMedico.visto = true;
+                _context.Update(peticionPacienteAMedico);
+                await _context.SaveChangesAsync();
+            }
+
+            return View(notificaciones);
+
+
+        }
+
         public ActionResult GetAllDoctors()
         {
             return View();
+        }
+
+        public async Task<int> NotificationsQuantity()
+        {
+
+            var peticiones = _context.PeticionPacienteAMedicos;
+            var doctorId = _userManager.GetUserId(HttpContext.User);
+            var notificaciones = await peticiones.Where(g => g.MedicoID == doctorId && g.visto == false).ToListAsync();
+
+           return notificaciones.Count;
         }
 
         private bool MedicoExists(string id)

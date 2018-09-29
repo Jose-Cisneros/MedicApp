@@ -1,0 +1,53 @@
+﻿@model IEnumerable<medic.Data.Model.PeticionPacienteAMedico>
+
+@{
+    ViewData["Title"] = "NotificationsView";
+}
+
+<h2>NotificationsView</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fecha)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.visto)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Medico)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Paciente)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.visto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Medico.MedicoID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Paciente.PacienteID)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PeticionPacienteAMedicoID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PeticionPacienteAMedicoID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PeticionPacienteAMedicoID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

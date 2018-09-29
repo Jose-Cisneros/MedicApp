@@ -17,7 +17,8 @@ namespace medic.Data.Model
         public String Email { get; set; }
 
         public virtual ICollection<Consulta> Consultas { get; set; }
-       
+
+
 
 
     }

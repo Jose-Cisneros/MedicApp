@@ -12,9 +12,10 @@ using System;
 namespace medic.Data.Migrations
 {
     [DbContext(typeof(MedicContext))]
-    partial class MedicContextModelSnapshot : ModelSnapshot
+    [Migration("20180928163919_peticiones")]
+    partial class peticiones
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,28 +86,6 @@ namespace medic.Data.Migrations
                     b.ToTable("Pacientes");
                 });
 
-            modelBuilder.Entity("medic.Data.Model.PeticionPacienteAMedico", b =>
-                {
-                    b.Property<string>("PeticionPacienteAMedicoID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("Fecha");
-
-                    b.Property<string>("MedicoID");
-
-                    b.Property<string>("PacienteID");
-
-                    b.Property<bool>("visto");
-
-                    b.HasKey("PeticionPacienteAMedicoID");
-
-                    b.HasIndex("MedicoID");
-
-                    b.HasIndex("PacienteID");
-
-                    b.ToTable("PeticionPacienteAMedicos");
-                });
-
             modelBuilder.Entity("medic.Data.Model.Consulta", b =>
                 {
                     b.HasOne("medic.Data.Model.Medico", "Medico")
@@ -115,17 +94,6 @@ namespace medic.Data.Migrations
 
                     b.HasOne("medic.Data.Model.Paciente", "Paciente")
                         .WithMany("Consultas")
-                        .HasForeignKey("PacienteID");
-                });
-
-            modelBuilder.Entity("medic.Data.Model.PeticionPacienteAMedico", b =>
-                {
-                    b.HasOne("medic.Data.Model.Medico", "Medico")
-                        .WithMany()
-                        .HasForeignKey("MedicoID");
-
-                    b.HasOne("medic.Data.Model.Paciente", "Paciente")
-                        .WithMany()
                         .HasForeignKey("PacienteID");
                 });
 #pragma warning restore 612, 618
