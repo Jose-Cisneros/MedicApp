@@ -9,6 +9,8 @@ using medic.Data.Context;
 using medic.Data.Model;
 using Microsoft.AspNetCore.Identity;
 using medic.Models;
+using System.Net.Mail;
+using System.Text;
 
 namespace medic.Controllers
 {
@@ -163,18 +165,26 @@ namespace medic.Controllers
 
         public async Task<IActionResult> GetNotificaciones()
         {
+            List<PeticionPacienteAMedico> listaNotif = new List<PeticionPacienteAMedico>();
             var peticiones = _context.PeticionPacienteAMedicos;
             var doctorId = _userManager.GetUserId(HttpContext.User);
+
             var notificaciones = await peticiones.Where(g => g.MedicoID == doctorId && g.visto == false ).ToListAsync();
 
             foreach (PeticionPacienteAMedico peticionPacienteAMedico in notificaciones )
             {
+                var ppam = new PeticionPacienteAMedico();
+                ppam.PacienteID = peticionPacienteAMedico.PacienteID;
+                listaNotif.Add(ppam);
+
                 peticionPacienteAMedico.visto = true;
                 _context.Update(peticionPacienteAMedico);
                 await _context.SaveChangesAsync();
             }
 
-            return View(notificaciones);
+            
+
+            return View(listaNotif);
 
 
         }
@@ -197,6 +207,30 @@ namespace medic.Controllers
         private bool MedicoExists(string id)
         {
             return _context.Medicos.Any(e => e.MedicoID == id);
+        }
+        
+        public async Task ConsultaConfirmationAsync(string pacienteId)
+        {
+            var emailDestino = "juan.pardal@despegar.com";
+            var asunto = "Confirmacion turno";
+            var mensaje = "Se ha confirmado tu turno";
+
+            var pacientes = _context.Pacientes;
+            var paciente = await pacientes.Where(p => p.PacienteID == pacienteId).ToListAsync();
+
+
+            var client = new SmtpClient();
+            client.Port = 587;
+            client.Host = "smtp.live.com";
+            client.EnableSsl = true;
+            client.Timeout = 10000;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Credentials = new System.Net.NetworkCredential("juampi_csl@hotmail.com", "chumpoa1");
+            MailMessage mm = new MailMessage("juampi_csl@hotmail.com", emailDestino, asunto, mensaje);
+            mm.BodyEncoding = UTF8Encoding.UTF8;
+            mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+            client.Send(mm);
         }
     }
 }
