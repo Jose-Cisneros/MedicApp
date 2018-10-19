@@ -1,14 +1,12 @@
 ﻿@model IEnumerable<medic.Data.Model.PeticionPacienteAMedico>
 
 @{
-    ViewData["Title"] = "NotificationsView";
+    ViewData["Title"] = "Notificaciones";
 }
 
-<h2>NotificationsView</h2>
+<h2>Notificaciones</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -22,7 +20,7 @@
                 @Html.DisplayNameFor(model => model.Medico)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Paciente)
+                @Html.DisplayNameFor(model => model.Paciente.PacienteID)
             </th>
             <th></th>
         </tr>
@@ -37,15 +35,14 @@
                 @Html.DisplayFor(modelItem => item.visto)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Medico.MedicoID)
+                @Html.DisplayFor(modelItem => item.MedicoID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Paciente.PacienteID)
+                @Html.DisplayFor(modelItem => item.PacienteID)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.PeticionPacienteAMedicoID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PeticionPacienteAMedicoID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PeticionPacienteAMedicoID">Delete</a>
+                <a asp-action="ConsultaConfirmationAsync" asp-route-pacienteId="@item.PacienteID"  asp-route-fecha="@item.Fecha">Aceptar</a> |
+                <a asp-action="Delete" asp-route-id="@item.PeticionPacienteAMedicoID">Declinar</a>
             </td>
         </tr>
 }

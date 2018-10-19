@@ -9,6 +9,10 @@ using medic.Data.Context;
 using medic.Data.Model;
 using Microsoft.AspNetCore.Identity;
 using medic.Models;
+using System.Net.Mail;
+using System.Text;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace medic.Controllers
 {
@@ -16,6 +20,8 @@ namespace medic.Controllers
     {
         private readonly MedicContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+
+
 
         public MedicosController(MedicContext context, UserManager<ApplicationUser> userManager)
         {
@@ -163,18 +169,26 @@ namespace medic.Controllers
 
         public async Task<IActionResult> GetNotificaciones()
         {
+            List<PeticionPacienteAMedico> listaNotif = new List<PeticionPacienteAMedico>();
             var peticiones = _context.PeticionPacienteAMedicos;
             var doctorId = _userManager.GetUserId(HttpContext.User);
+
             var notificaciones = await peticiones.Where(g => g.MedicoID == doctorId && g.visto == false ).ToListAsync();
 
             foreach (PeticionPacienteAMedico peticionPacienteAMedico in notificaciones )
             {
+                var ppam = new PeticionPacienteAMedico();
+                ppam.PacienteID = peticionPacienteAMedico.PacienteID;
+                listaNotif.Add(ppam);
+
                 peticionPacienteAMedico.visto = true;
                 _context.Update(peticionPacienteAMedico);
                 await _context.SaveChangesAsync();
             }
 
-            return View(notificaciones);
+            
+
+            return View(listaNotif);
 
 
         }
@@ -197,6 +211,51 @@ namespace medic.Controllers
         private bool MedicoExists(string id)
         {
             return _context.Medicos.Any(e => e.MedicoID == id);
+        }
+        
+        public async Task ConsultaConfirmationAsync(string pacienteId,string fecha)
+        {
+            
+            var medicoId =  _userManager.GetUserId(HttpContext.User);
+            var medicoNombre = _context.Medicos.Where(m => m.MedicoID == medicoId).First().Nombre;
+
+
+            string body = string.Empty;
+
+            using (StreamReader reader = new StreamReader("./wwwroot/Templates/emailConfirmation.html"))
+            {
+                body = reader.ReadToEnd();
+                body = body.Replace("{UserName}", medicoNombre);
+                body = body.Replace("{fecha}", fecha);
+
+
+            }
+
+
+            var asunto = "Confirmacion turno";
+            var mensaje = "Se ha confirmado tu turno";
+
+            var pacientes = _userManager.Users;
+            var paciente = await pacientes.Where(p => p.Id == pacienteId).FirstAsync();
+
+            var emailDestino = paciente.Email;
+            var builder = new StringBuilder();
+
+           
+            var client = new SmtpClient();
+            client.Port = 587;
+            client.Host = "smtp.live.com";
+            client.EnableSsl = true;
+            client.Timeout = 10000;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Credentials = new System.Net.NetworkCredential("juampi_csl@hotmail.com", "chumpoa1");
+            MailMessage mm = new MailMessage("juampi_csl@hotmail.com", emailDestino, asunto, body);
+            mm.BodyEncoding = UTF8Encoding.UTF8;
+            mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+            mm.Body = body;
+            mm.IsBodyHtml = true;
+            client.Send(mm);
         }
     }
 }
