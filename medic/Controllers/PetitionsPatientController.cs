@@ -36,6 +36,7 @@ namespace medic.Controllers
 
             PeticionPacienteAMedico peticionPacienteAMedico = new PeticionPacienteAMedico();
             peticionPacienteAMedico.MedicoID = idMedico;
+            peticionPacienteAMedico.MedicoNombre = medico.Nombre;
 
 
             return View(peticionPacienteAMedico);

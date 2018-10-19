@@ -86,7 +86,7 @@ namespace medic.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(String id, [Bind("Nombre,DNI,Telefono")] Paciente paciente)
+        public async Task<IActionResult> Edit(String id, [Bind("PacienteID,Nombre,DNI,Telefono")] Paciente paciente)
         {
             if (id != paciente.PacienteID)
             {

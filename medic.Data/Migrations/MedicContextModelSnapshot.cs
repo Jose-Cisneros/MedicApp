@@ -96,6 +96,8 @@ namespace medic.Data.Migrations
 
                     b.Property<string>("MedicoID");
 
+                    b.Property<string>("MedicoNombre");
+
                     b.Property<string>("PacienteID");
 
                     b.Property<bool>("visto");

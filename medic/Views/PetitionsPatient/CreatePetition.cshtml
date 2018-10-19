@@ -4,21 +4,24 @@
     ViewData["Title"] = "CreatePetition";
 }
 
-<h2>CreatePetition</h2>
+<h2>Solicitar turno</h2>
 
-<h4>PeticionPacienteAMedico</h4>
+<h4>Paciente a medico</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="CreatePetition">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="form-group hidden">
                 <label asp-for="MedicoID" class="control-label"></label>
                 <input asp-for="MedicoID" class ="form-control" asp-items="ViewBag.MedicoID"></input>
             </div>
             
+                <b>Medico:</b>
+                @Model.MedicoNombre
+        
             <div class="form-group">
-                <label asp-for="Fecha" class="control-label"></label>
+                <label asp-for="Fecha" class="control-label">Seleccione fecha:</label>
                 <input asp-for="Fecha" class="form-control" />
                 <span asp-validation-for="Fecha" class="text-danger"></span>
             </div>

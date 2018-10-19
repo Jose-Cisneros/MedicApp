@@ -10,6 +10,7 @@ namespace medic.Data.Model
         public String PeticionPacienteAMedicoID { get; set; }
 
         public String MedicoID { get; set; }
+        public String MedicoNombre { get; set; }
         public Medico Medico { get; set; }
 
         public String PacienteID { get; set; }

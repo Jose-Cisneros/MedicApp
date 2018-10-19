@@ -252,7 +252,8 @@ namespace medic.Controllers
 
 
                         case "paciente":
-                            _dataManager.Add(new Paciente() { PacienteID = userId });
+                            var pac = new Paciente() { PacienteID = userId };
+                            _dataManager.Add(pac);
                             await _dataManager.SaveChangesAsync();
                             _logger.LogInformation("User created a new account with password.");
                             return RedirectToAction("edit", "Pacientes", new { id = userId });
