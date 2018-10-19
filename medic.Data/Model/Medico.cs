@@ -13,6 +13,9 @@ namespace medic.Data.Model
         public String Especialidad { get; set; }
         public int DNI { get; set; }
         public int Matricula { get; set; }
+        public long Telefono { get; set; }
+        public String Direccion { get; set; } 
+   
 
         public virtual ICollection<Consulta> Consultas { get; set; }
 

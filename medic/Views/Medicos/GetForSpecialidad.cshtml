@@ -30,7 +30,7 @@
                             </form>
                         </div>
                         <div class="col col-xs-6 text-right">
-                            <a class="btn btn-sm btn-primary btn-create" asp-action="Create">Nuevo Paciente</a>
+                           
                         </div>
                     </div>
                 </div>
@@ -44,16 +44,18 @@
                                     @Html.DisplayNameFor(model => model.Nombre)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.DNI)
-                                </th>
-                                <th>
                                     @Html.DisplayNameFor(model => model.Especialidad)
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.Matricula)
                                 </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Telefono)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Direccion)
+                                </th>
 
-                                <th><em class="fa fa-cog"></em></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,30 +63,28 @@
                             @foreach (var item in Model)
                             {
 
-                                <tr>
+                            <tr>
 
 
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Nombre)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.DNI)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Especialidad)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Matricula)
-                                    </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Especialidad)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Matricula)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Telefono)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Direccion)
+                                </td>
 
-                                    <td align="center">
-                                        <a class="disabled btn btn-default" asp-action="Details"><em class="fa fa-info"></em></a>
-                                        <a class="disabled btn btn-default" asp-action="Edit"><em class="fa fa-pencil"></em></a>
-                                        <a class="disabled btn btn-danger" asp-action="Delete"><em class="fa fa-trash"></em></a>
+                                
 
-                                    </td>
-
-                                </tr>
+                            </tr>
                             }
 
                         </tbody>

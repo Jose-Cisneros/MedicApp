@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using static medic.Models.ApplicationUser;
 
 namespace medic.Models.AccountViewModels
 {
@@ -11,5 +12,12 @@ namespace medic.Models.AccountViewModels
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+
+      
+        public string Name { get; set; }
+
+        [Required]
+        [Display(Name = "Tipo")]
+        public Tipo Usuario { get; set; }
     }
 }

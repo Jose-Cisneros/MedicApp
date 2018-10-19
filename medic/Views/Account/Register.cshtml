@@ -34,6 +34,16 @@
             </div>
             <button type="submit" class="btn btn-default">Register</button>
         </form>
+
+        <form method="post" class="form-horizontal" action="/Account/ExternalLogin?returnurl=%2FAccount%2FExternalLoginCallback">
+            <div>
+                <p>
+
+                    <button type="submit" class="btn btn-default btn-facebook" name="provider" value="Facebook" title="Ingrese con su cuenta de Facebook "><span class="fa fa-facebook"></span> Ingresar con Facebook</button>
+                </p>
+            </div>
+            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8FN0JZy6_qREm36VC3oZAhW1UiNTbciH7LpYTUQokmSGM_yw2C6YXHUGdBNLZdvhDBfKpS3d6JazAMYE53qgH6PWUs1IuV0mTudRR1xyZLb_7dN2IZt0LtPuAi7DmftibaecYis1WvY8a6JMvNcp84A">
+        </form>
     </div>
 </div>
 

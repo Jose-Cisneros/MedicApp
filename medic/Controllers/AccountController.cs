@@ -34,7 +34,7 @@ namespace medic.Controllers
             MedicContext dataManager,
             IEmailSender emailSender,
             ILogger<AccountController> logger)
-            
+
         {
             _dataManager = dataManager;
             _userManager = userManager;
@@ -71,7 +71,7 @@ namespace medic.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    
+
                     return RedirectToAction("index", "Users");
                 }
                 if (result.RequiresTwoFactor)
@@ -232,7 +232,7 @@ namespace medic.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-                   
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
@@ -261,7 +261,7 @@ namespace medic.Controllers
                             return StatusCode(400);
 
                     }
-                   
+
                 }
                 AddErrors(result);
             }
@@ -302,6 +302,7 @@ namespace medic.Controllers
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
+
                 return RedirectToAction(nameof(Login));
             }
 
@@ -310,7 +311,8 @@ namespace medic.Controllers
             if (result.Succeeded)
             {
                 _logger.LogInformation("User logged in with {Name} provider.", info.LoginProvider);
-                return RedirectToLocal(returnUrl);
+                return RedirectToAction("Index", "Users");
+
             }
             if (result.IsLockedOut)
             {
@@ -322,7 +324,8 @@ namespace medic.Controllers
                 ViewData["ReturnUrl"] = returnUrl;
                 ViewData["LoginProvider"] = info.LoginProvider;
                 var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-                return View("ExternalLogin", new ExternalLoginViewModel { Email = email });
+                var name = info.Principal.FindFirstValue(ClaimTypes.Name);
+                return View("ExternalLogin", new ExternalLoginViewModel { Email = email, Name = name });
             }
         }
 
@@ -339,16 +342,39 @@ namespace medic.Controllers
                 {
                     throw new ApplicationException("Error loading external login information during confirmation.");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Name, Email = model.Email, Type = model.Usuario };
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {
+                        var userId = user.Id;
+                        String tipo = user.Type.ToString();
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
-                        return RedirectToLocal(returnUrl);
+                        switch (tipo)
+                        {
+                            case "admin":
+                                return RedirectToAction("Admin");
+
+                            case "medico":
+                                _dataManager.Add(new Medico() { MedicoID = userId });
+                                await _dataManager.SaveChangesAsync();
+                                _logger.LogInformation("User created a new account with password.");
+                                return RedirectToAction("edit", "Medicos", new { id = userId,  });
+
+
+                            case "paciente":
+                                _dataManager.Add(new Paciente() { PacienteID = userId });
+                                await _dataManager.SaveChangesAsync();
+                                _logger.LogInformation("User created a new account with password.");
+                                return RedirectToAction("edit", "Pacientes", new { id = userId });
+
+                            default:
+                                return StatusCode(400);
+
+                        }
                     }
                 }
                 AddErrors(result);

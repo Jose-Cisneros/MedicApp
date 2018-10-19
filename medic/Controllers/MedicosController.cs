@@ -95,7 +95,7 @@ namespace medic.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(String id, [Bind("MedicoID,Nombre,DNI,Matricula,Especialidad")] Medico medico)
+        public async Task<IActionResult> Edit(String id, [Bind("MedicoID,Nombre,DNI,Matricula,Especialidad,Telefono,Direccion")] Medico medico)
         {
             if (id != medico.MedicoID)
             {
@@ -120,7 +120,7 @@ namespace medic.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index","Users");
             }
             return View(medico);
         }

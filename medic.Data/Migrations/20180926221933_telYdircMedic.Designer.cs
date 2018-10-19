@@ -12,9 +12,10 @@ using System;
 namespace medic.Data.Migrations
 {
     [DbContext(typeof(MedicContext))]
-    partial class MedicContextModelSnapshot : ModelSnapshot
+    [Migration("20180926221933_telYdircMedic")]
+    partial class telYdircMedic
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,6 +76,8 @@ namespace medic.Data.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("DNI");
+
+                    b.Property<string>("Email");
 
                     b.Property<string>("Nombre");
 

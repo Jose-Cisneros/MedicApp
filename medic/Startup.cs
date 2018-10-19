@@ -15,6 +15,8 @@ using medic.Data.Context;
 using Medic.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Authentication.Facebook;
+using Microsoft.AspNetCore.Authentication;
 
 namespace medic
 {
@@ -38,6 +40,7 @@ namespace medic
 
 
 
+
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
                { // Password settings
                    options.Password.RequireDigit = false;
@@ -46,10 +49,6 @@ namespace medic
                    options.Password.RequireLowercase = false;
                    options.Password.RequireNonAlphanumeric = false;
                    options.Password.RequireUppercase = false;
-
-
-
-
                })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -67,6 +66,14 @@ namespace medic
                                  .RequireAuthenticatedUser()
                                  .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
+            });
+
+
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+                facebookOptions.ClaimActions.MapJsonKey("display-name", "name");
             });
         }
 
@@ -87,6 +94,8 @@ namespace medic
             app.UseStaticFiles();
 
             app.UseAuthentication();
+
+
 
             app.UseMvc(routes =>
             {

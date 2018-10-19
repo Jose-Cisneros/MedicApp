@@ -111,7 +111,7 @@ namespace medic.Web.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Users");
             }
             return View(paciente);
         }

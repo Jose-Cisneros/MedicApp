@@ -14,7 +14,6 @@ namespace medic.Data.Model
         public int DNI { get; set; }
         public int Telefono { get; set; }
         public String Observacion { get; set; }
-        public String Email { get; set; }
 
         public virtual ICollection<Consulta> Consultas { get; set; }
        
