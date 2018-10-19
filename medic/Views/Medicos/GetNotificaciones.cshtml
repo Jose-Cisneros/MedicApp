@@ -41,7 +41,7 @@
                 @Html.DisplayFor(modelItem => item.PacienteID)
             </td>
             <td>
-                <a asp-action="ConsultaConfirmationAsync" asp-route-pacienteId="@item.PacienteID">Aceptar</a> |
+                <a asp-action="ConsultaConfirmationAsync" asp-route-pacienteId="@item.PacienteID"  asp-route-fecha="@item.Fecha">Aceptar</a> |
                 <a asp-action="Delete" asp-route-id="@item.PeticionPacienteAMedicoID">Declinar</a>
             </td>
         </tr>
