@@ -5,10 +5,6 @@
     <UserSecretsId>aspnet-medic-802DB63E-FC20-4767-B1B4-9FEF3F9FDA96</UserSecretsId>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="Views\Home\index.cshtml" />
-  </ItemGroup>
-
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
@@ -23,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Views\Home\index.cshtml" />
     <None Include="wwwroot\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
     <None Include="wwwroot\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
     <None Include="wwwroot\fonts\font-awesome-4.7.0\less\animated.less" />

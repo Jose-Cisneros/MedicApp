@@ -256,6 +256,7 @@ namespace medic.Controllers
             mm.Body = body;
             mm.IsBodyHtml = true;
             client.Send(mm);
+   
         }
     }
 }
