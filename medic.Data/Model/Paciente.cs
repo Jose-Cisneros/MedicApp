@@ -16,7 +16,8 @@ namespace medic.Data.Model
         public String Observacion { get; set; }
 
         public virtual ICollection<Consulta> Consultas { get; set; }
-       
+
+
 
 
     }

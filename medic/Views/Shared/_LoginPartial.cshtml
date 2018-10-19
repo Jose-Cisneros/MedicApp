@@ -14,8 +14,16 @@
         a span {
             color: white;
         }
+
         #color {
-            color:white;
+            color: white;
+        }
+
+        .notificacion {
+            background-color: red;
+            width: fit-content;
+            padding: 5px;
+            border-radius: 5px;
         }
     </style>
 
@@ -23,6 +31,11 @@
         <ul class="nav navbar-nav navbar-right">
             <li>
                 <a id="color" asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Buenas @UserManager.GetUserName(User)!</a>
+            </li>
+            <li>
+                <a id="color" class="notificaciones" asp-controller="Medicos" asp-action="GetNotificaciones">Notificaciones </a>
+
+
             </li>
             <li>
                 <button type="submit" id="color" class="btn btn-link navbar-btn navbar-link">Log out</button>

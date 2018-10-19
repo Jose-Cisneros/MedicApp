@@ -15,6 +15,8 @@ namespace medic.Data.Context
         public DbSet<Medico> Medicos { get; set; }
         public DbSet<Paciente> Pacientes { get; set; }
         public DbSet<Consulta> Consultas { get; set; }
+        public DbSet<PeticionPacienteAMedico> PeticionPacienteAMedicos { get; set; }
+
 
         public static implicit operator MedicContext(List<Medico> v)
         {

@@ -19,13 +19,13 @@
 
 <h2 class="text-center">Menú de medico</h2>
 <br />
-<div class="container" >
+<div class="container">
     <div class="col-md-4">
         <a class="btn btn-block btn-lg btn-success" asp-controller="Calendar" asp-action="Index">
             <i class="fa fa-calendar" id="icone_grande"></i> <br><br>
             <span class="texto_grande"><i class="fa fa-list-alt"></i> Calendario</span>
         </a>
-        <br/>
+        <br />
     </div>
     <div class="col-md-4">
         <a class="btn btn-block btn-lg btn-primary" asp-controller="Consultas" asp-action="Index">
@@ -41,15 +41,47 @@
         </a>
         <br />
     </div>
-    <!--
-        <div class="col-md-3">
-        <a class="btn btn-block btn-lg btn-info" data-toggle="modal" data-target="#mymodal">
-            <i class="fa fa-pied-piper-alt" id="icone_grande"></i> <br><br>
-            <span class="texto_grande"><i class="fa fa-list-ul"></i> LIST Usuários</span>
-        </a>
-    </div>
-    -->
+
 </div>
 
+<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"></script>
+
+
+
+
+<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"></script>
+
+
+
+<script type="text/javascript">
+
+    function respuestaCantidad() {
+
+
+            let cantidad = ` `
+
+
+          $.get('@Url.Action("NotificationsQuantity", "Medicos")', function (resp) {
+
+            console.log(resp)
+
+            if (resp > 0) {
+
+                cantidad += ` <span class="notificacion">${resp}</span> `;
+                document.querySelector(".notificaciones").innerHTML += cantidad;
+
+
+            }
+            else {
+                console.log("No entra al if")
+            }
+
+        })
+    }
+
+
+
+    respuestaCantidad();
+</script>
 
 

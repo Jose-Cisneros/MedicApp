@@ -12,9 +12,10 @@ using System;
 namespace medic.Data.Migrations
 {
     [DbContext(typeof(MedicContext))]
-    partial class MedicContextModelSnapshot : ModelSnapshot
+    [Migration("20180928170157_peticiones3")]
+    partial class peticiones3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,15 +55,11 @@ namespace medic.Data.Migrations
 
                     b.Property<int>("DNI");
 
-                    b.Property<string>("Direccion");
-
                     b.Property<string>("Especialidad");
 
                     b.Property<int>("Matricula");
 
                     b.Property<string>("Nombre");
-
-                    b.Property<long>("Telefono");
 
                     b.HasKey("MedicoID");
 
@@ -75,6 +72,8 @@ namespace medic.Data.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("DNI");
+
+                    b.Property<string>("Email");
 
                     b.Property<string>("Nombre");
 
@@ -91,8 +90,6 @@ namespace medic.Data.Migrations
                 {
                     b.Property<string>("PeticionPacienteAMedicoID")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("Fecha");
 
                     b.Property<string>("MedicoID");
 
