@@ -213,7 +213,7 @@ namespace medic.Controllers
             return _context.Medicos.Any(e => e.MedicoID == id);
         }
         
-        public async Task ConsultaConfirmationAsync(string pacienteId,string fecha)
+        public async Task<IActionResult> ConsultaConfirmationAsync(string pacienteId,string fecha)
         {
             
             var medicoId =  _userManager.GetUserId(HttpContext.User);
@@ -249,14 +249,15 @@ namespace medic.Controllers
             client.Timeout = 10000;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
-            client.Credentials = new System.Net.NetworkCredential("juampi_csl@hotmail.com", "chumpoa1");
-            MailMessage mm = new MailMessage("juampi_csl@hotmail.com", emailDestino, asunto, body);
+            client.Credentials = new System.Net.NetworkCredential("medicapp2018@hotmail.com", "chumpoa1");
+            MailMessage mm = new MailMessage("medicapp2018@hotmail.com", emailDestino, asunto, body);
             mm.BodyEncoding = UTF8Encoding.UTF8;
             mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
             mm.Body = body;
             mm.IsBodyHtml = true;
             client.Send(mm);
-   
+
+            return View();
         }
     }
 }

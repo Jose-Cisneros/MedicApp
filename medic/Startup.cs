@@ -68,13 +68,14 @@ namespace medic
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
 
-
+            /*
             services.AddAuthentication().AddFacebook(facebookOptions =>
             {
                 facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
                 facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
                 facebookOptions.ClaimActions.MapJsonKey("display-name", "name");
             });
+            */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

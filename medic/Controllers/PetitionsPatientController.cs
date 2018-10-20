@@ -36,7 +36,6 @@ namespace medic.Controllers
 
             PeticionPacienteAMedico peticionPacienteAMedico = new PeticionPacienteAMedico();
             peticionPacienteAMedico.MedicoID = idMedico;
-            peticionPacienteAMedico.MedicoNombre = medico.Nombre;
 
 
             return View(peticionPacienteAMedico);
@@ -61,9 +60,9 @@ namespace medic.Controllers
 
                 _context.Add(peticionPacienteAMedico);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return View("Views/PetitionsPatient/ConfirmacionpeticionPacienteAMedico.cshtml");
             }
-            return View(peticionPacienteAMedico);
+            return View("ConfirmacionpeticionPacienteAMedico.cshtml");
         }
         
     }
