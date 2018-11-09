@@ -36,6 +36,7 @@ namespace medic.Controllers
 
             PeticionPacienteAMedico peticionPacienteAMedico = new PeticionPacienteAMedico();
             peticionPacienteAMedico.MedicoID = idMedico;
+            peticionPacienteAMedico.MedicoNombre = medico.Nombre;
 
 
             return View(peticionPacienteAMedico);
@@ -51,7 +52,9 @@ namespace medic.Controllers
 
             if (ModelState.IsValid)
             {
+
                 peticionPacienteAMedico.PacienteID = _userManager.GetUserId(HttpContext.User);
+                peticionPacienteAMedico.PacienteNombre = _context.Pacientes.FirstOrDefault(x => x.PacienteID == peticionPacienteAMedico.PacienteID).Nombre;
                 peticionPacienteAMedico.MedicoID = MedicoID;
                 peticionPacienteAMedico.Fecha = Fecha;
                 peticionPacienteAMedico.visto = false;

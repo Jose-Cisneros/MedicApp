@@ -34,7 +34,7 @@ namespace medic.Controllers
 
             var userId = _userManager.GetUserId(HttpContext.User);
 
-            return View(await medicContext.Where( g => g.OwnerID == userId).ToListAsync());
+            return View(await medicContext.Where( g => g.OwnerID == userId || g.PacienteID == userId).ToListAsync());
         }
 
         // GET: Consultas/Details/5

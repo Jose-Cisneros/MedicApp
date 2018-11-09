@@ -36,7 +36,7 @@ namespace medic.Controllers
 
             var userId = _userManager.GetUserId(HttpContext.User);
 
-            return Json(View(await medicContext.Where(g => g.OwnerID == userId).ToListAsync()));
+            return Json(View(await medicContext.Where(g => g.MedicoID == userId || g.PacienteID == userId).ToListAsync()));
 
         }
 
@@ -45,7 +45,7 @@ namespace medic.Controllers
             var medicContext = _context.Consultas.Include(c => c.Medico).Include(c => c.Paciente);
 
             var userId = _userManager.GetUserId(HttpContext.User);
-            var consults = await medicContext.Where(g => g.OwnerID == userId).ToListAsync();
+            var consults = await medicContext.Where(g => g.OwnerID == userId || g.PacienteID == userId).ToListAsync();
             var eventList = new List<EventSource>();
             foreach ( var c in consults)
             {
@@ -62,7 +62,7 @@ namespace medic.Controllers
       
             var newDate = DateTime.Parse(date);
             var userId = _userManager.GetUserId(HttpContext.User);
-            var list = await _context.Consultas.Where(g => g.OwnerID == userId && g.Fecha.Date == newDate).ToListAsync();
+            var list = await _context.Consultas.Where(g => (g.OwnerID == userId || g.PacienteID == userId) && g.Fecha.Date == newDate).ToListAsync();
             return PartialView(list);
         }
     }

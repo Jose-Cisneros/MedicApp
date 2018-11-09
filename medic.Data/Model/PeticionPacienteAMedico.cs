@@ -15,6 +15,7 @@ namespace medic.Data.Model
 
         public String PacienteID { get; set; }
         public Paciente Paciente { get; set; }
+        public String PacienteNombre { get; set; }
 
         public DateTime Fecha { get; set; }
 

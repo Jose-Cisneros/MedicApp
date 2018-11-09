@@ -15,12 +15,9 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.visto)
-                </th>
+                </th>>
             <th>
-                @Html.DisplayNameFor(model => model.Medico)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Paciente.PacienteID)
+               Paciente
             </th>
             <th></th>
         </tr>
@@ -34,11 +31,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.visto)
             </td>
+
             <td>
-                @Html.DisplayFor(modelItem => item.MedicoID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PacienteID)
+                @Html.DisplayFor(modelItem => item.PacienteNombre)
             </td>
             <td>
                 <a asp-action="ConsultaConfirmationAsync" asp-route-pacienteId="@item.PacienteID"  asp-route-fecha="@item.Fecha">Aceptar</a> |

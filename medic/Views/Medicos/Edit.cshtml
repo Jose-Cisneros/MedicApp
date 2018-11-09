@@ -30,7 +30,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="Especialidad" class="control-label"></label>
-                <input asp-for="Especialidad" class="form-control" />
+                <select asp-for="Especialidad" class="form-control">
+                    <option value="traumatologo">Traumatologo</option>
+                    <option value="pediatra">Pediatra</option>
+                    <option value="cirujano">Cirujano</option>
+                    <option value="nutricionista">Nutricionista</option>
+                    <option value="dermatologo">Dermatologo</option>
+                    <option value="oftalmologo">Oftalmologo</option>
+                </select>
                 <span asp-validation-for="Especialidad" class="text-danger"></span>
             </div>
             <div class="form-group">

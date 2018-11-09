@@ -3,14 +3,13 @@
     ViewData["Title"] = "Register";
 }
 
-<h2>@ViewData["Title"]</h2>
-<h4>Associate your @ViewData["LoginProvider"] account.</h4>
+<h2>Registro</h2>
+<h4>Asociá tu cueta de @ViewData["LoginProvider"].</h4>
 <hr />
 
 <p class="text-info">
-    You've successfully authenticated with <strong>@ViewData["LoginProvider"]</strong>.
-    Please enter an email address for this site below and click the Register button to finish
-    logging in.
+    Fuiste correctamente autenticado con <strong>@ViewData["LoginProvider"]</strong>.
+    Confirmá tu Email y tu nombre de usuario para poder loguearte.
 </p>
 
 <div class="row">
@@ -22,16 +21,16 @@
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
 
-                <label asp-for="Name"></label>
+                <label asp-for="Name">Nombre de usuario</label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
-
+                <br />
                 <label asp-for="Usuario" class="control-label"></label>
                 <select asp-for="Usuario" asp-items="Html.GetEnumSelectList<ApplicationUser.Tipo>()" asp-class="form-control"></select>
                 <span asp-validation-for="Usuario" class="text-danger"></span>
 
             </div>
-            <button type="submit" class="btn btn-default">Register</button>
+            <button type="submit" class="btn btn-default">Registrarte</button>
         </form>
     </div>
 </div>

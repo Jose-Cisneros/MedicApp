@@ -173,13 +173,12 @@ namespace medic.Controllers
             var peticiones = _context.PeticionPacienteAMedicos;
             var doctorId = _userManager.GetUserId(HttpContext.User);
 
-            var notificaciones = await peticiones.Where(g => g.MedicoID == doctorId && g.visto == false ).ToListAsync();
+            var notificaciones = await peticiones.Where(g => g.MedicoID == doctorId ).ToListAsync();
 
             foreach (PeticionPacienteAMedico peticionPacienteAMedico in notificaciones )
             {
-                var ppam = new PeticionPacienteAMedico();
-                ppam.PacienteID = peticionPacienteAMedico.PacienteID;
-                listaNotif.Add(ppam);
+    
+                listaNotif.Add(peticionPacienteAMedico);
 
                 peticionPacienteAMedico.visto = true;
                 _context.Update(peticionPacienteAMedico);
@@ -203,7 +202,7 @@ namespace medic.Controllers
 
             var peticiones = _context.PeticionPacienteAMedicos;
             var doctorId = _userManager.GetUserId(HttpContext.User);
-            var notificaciones = await peticiones.Where(g => g.MedicoID == doctorId && g.visto == false).ToListAsync();
+            var notificaciones = await peticiones.Where(g => g.MedicoID == doctorId && g.visto==false ).ToListAsync();
 
            return notificaciones.Count;
         }
@@ -256,6 +255,18 @@ namespace medic.Controllers
             mm.Body = body;
             mm.IsBodyHtml = true;
             client.Send(mm);
+
+            var consulta = new Consulta
+            {
+                OwnerID = medicoId,
+                MedicoID = medicoId,
+                PacienteID = pacienteId,
+                Estado = Estado.Pendiente,
+                Fecha = DateTime.Parse(fecha)
+            };
+            _context.Consultas.Add(consulta);
+            await _context.SaveChangesAsync();
+
 
             return View();
         }
