@@ -197,6 +197,50 @@ namespace medic.Controllers
             return View();
         }
 
+        public async Task<ActionResult> SendRecomendationAsync(String idMedico)
+        {
+            var user = _userManager.GetUserId(HttpContext.User);
+            var medicoNombre = _context.Medicos.Where(m => m.MedicoID == idMedico).First().Nombre;
+            var pacNombre = _context.Pacientes.Where(m => m.PacienteID == user).First().Nombre;
+
+
+            string body = string.Empty;
+
+
+            using (StreamReader reader = new StreamReader("./wwwroot/Templates/Recomendation.html"))
+            {
+                body = reader.ReadToEnd();
+                body = body.Replace("{UserNameFrom}", pacNombre);
+                body = body.Replace("{especialista}", medicoNombre);
+
+
+            }
+
+
+            var asunto = "Te han recomendado un especialista";
+
+            var pacientes = _userManager.Users;
+
+            var emailDestino = "juampi_csl@hotmail.com";
+            var builder = new StringBuilder();
+
+
+            var client = new SmtpClient();
+            client.Port = 587;
+            client.Host = "smtp.live.com";
+            client.EnableSsl = true;
+            client.Timeout = 30000;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Credentials = new System.Net.NetworkCredential("medicapp2018@hotmail.com", "chumpoa1");
+            MailMessage mm = new MailMessage("medicapp2018@hotmail.com", emailDestino, asunto, body);
+            mm.BodyEncoding = UTF8Encoding.UTF8;
+            mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+            mm.Body = body;
+            mm.IsBodyHtml = true;
+            client.Send(mm);
+            return View();
+        }
         public async Task<int> NotificationsQuantity()
         {
 
@@ -271,4 +315,6 @@ namespace medic.Controllers
             return View();
         }
     }
+
+
 }

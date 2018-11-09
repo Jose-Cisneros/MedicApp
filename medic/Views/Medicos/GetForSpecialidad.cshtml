@@ -83,9 +83,18 @@
                                     @Html.DisplayFor(modelItem => item.Direccion)
                                 </td>
 
+
                                 <td align="center">
                                     <a class=" btn btn-default" asp-controller="PetitionsPatient" asp-action="CreatePetition" asp-route-idMedico="@item.MedicoID"><em class="fa fa-info">Solicitar turno</em></a>
-                                    
+                                </td>
+                                <td align="center">
+                                    <form >
+                                        <label class="control-label">Email:</label>
+                                        <input class="form-control" name="email" />
+                                        <a class=" btn btn-default"  asp-action="SendRecomendationAsync" asp-route-idMedico="@item.MedicoID"><em class="fa fa-info">Recomendar</em></a>
+                                  </form>
+                                </td>
+
 
                             </tr>
                             }
