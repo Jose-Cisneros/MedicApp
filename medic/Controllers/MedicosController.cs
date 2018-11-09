@@ -197,7 +197,8 @@ namespace medic.Controllers
             return View();
         }
 
-        public async Task<ActionResult> SendRecomendationAsync(String idMedico)
+       [HttpGet]
+        public async Task<ActionResult> SendRecomendationAsync(String idMedico, String email)
         {
             var user = _userManager.GetUserId(HttpContext.User);
             var medicoNombre = _context.Medicos.Where(m => m.MedicoID == idMedico).First().Nombre;
@@ -221,7 +222,7 @@ namespace medic.Controllers
 
             var pacientes = _userManager.Users;
 
-            var emailDestino = "juampi_csl@hotmail.com";
+            var emailDestino = email;
             var builder = new StringBuilder();
 
 
