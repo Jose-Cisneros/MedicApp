@@ -20,33 +20,35 @@
 <h2 class="text-center">Menú de Paciente</h2>
 <br />
 <div class="container">
-    <div class="col-md-4">
-        <a class="btn btn-block btn-lg btn-success" asp-controller="Calendar" asp-action="Index">
-            <i class="fa fa-calendar" id="icone_grande"></i> <br><br>
-            <span class="texto_grande"><i class="fa fa-list-alt"></i> Calendario</span>
-        </a>
-        <br />
+    <div class="row">
+        <div class="col-md-4">
+            <a class="btn btn-block btn-lg btn-success" asp-controller="Calendar" asp-action="Index">
+                <i class="fa fa-calendar" id="icone_grande"></i> <br><br>
+                <span class="texto_grande"><i class="fa fa-list-alt"></i> Calendario</span>
+            </a>
+            <br />
+        </div>
+        <div class="col-md-4">
+            <a class="btn btn-block btn-lg btn-primary" asp-controller="Consultas" asp-action="Index">
+                <i class="fa fa-user-md" id="icone_grande"></i> <br><br>
+                <span class="texto_grande"><i class="fa fa-list-ul"></i>Mis consultas</span>
+            </a>
+            <br />
+        </div>
+        <div class="col-md-4">
+            <a class="btn btn-block btn-lg btn-info" asp-controller="Medicos" asp-action="GetAllDoctors">
+                <i class="fa fa-users" id="icone_grande"></i> <br><br>
+                <span class="texto_grande"><i class="fa fa-plus-circle"></i> Buscar especialistas</span>
+            </a>
+            <br />
+        </div>
     </div>
-    <div class="col-md-4">
-        <a class="btn btn-block btn-lg btn-primary" asp-controller="Consultas" asp-action="Index">
-            <i class="fa fa-user-md" id="icone_grande"></i> <br><br>
-            <span class="texto_grande"><i class="fa fa-list-ul"></i> Consultas</span>
-        </a>
-        <br />
+    <div class="row">
+        <div style="justify-content:center; background-color:#81c784; padding:10px" class="img-responsive dis-flex">
+            <img src="~/images/eAfZ6mb.png" />
+            <img src="~/images/sX8mnaX.png" />
+        </div>
     </div>
-    <div class="col-md-4">
-        <a class="btn btn-block btn-lg btn-info" asp-controller="Medicos" asp-action="GetAllDoctors">
-            <i class="fa fa-users" id="icone_grande"></i> <br><br>
-            <span class="texto_grande"><i class="fa fa-plus-circle"></i> Buscar especialistas</span>
-        </a>
-        <br />
-    </div>
-    <!--
-        <div class="col-md-3">
-        <a class="btn btn-block btn-lg btn-info" data-toggle="modal" data-target="#mymodal">
-            <i class="fa fa-pied-piper-alt" id="icone_grande"></i> <br><br>
-            <span class="texto_grande"><i class="fa fa-list-ul"></i> LIST Usuários</span>
-        </a>
-    </div>
-    -->
+ 
+
 </div>
